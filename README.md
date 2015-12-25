@@ -19,7 +19,7 @@ obstacles will be given in advance.
 * [Proteus] (Any simulator you like).
 * [Arduino IDE].
 * [Python IDLE] (Any IDE you like).
-****
+
 **Free Software, Hell Yeah!**
 
 [Proteus]: <http://www.labcenter.com/download/prodemo_download.cfm>

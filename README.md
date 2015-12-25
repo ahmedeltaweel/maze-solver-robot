@@ -15,6 +15,7 @@ obstacles will be given in advance.
 - PCB design components (Wires, Soldering Iron, Soldering wire, Acid).
 - Robot Body (Acrylic or Wood).
 - DC motor Driver (Opto-coupler, MOSFET transistors IRF540n , 330 Ohm Resistors)
+
 ###### Software: 
 * [Proteus] (Any simulator you like).
 * [Arduino IDE].

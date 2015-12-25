@@ -1,18 +1,20 @@
 # Initialization
 import cPickle, copy
+import os , sys
 
 
-#grid = 	  [[0, 1, 0, 0, 0, 0],
+# grid = 	  [[0, 1, 0, 0, 0, 0],
 #           [0, 1, 0, 0, 0, 0],
 #           [0, 1, 0, 0, 0, 0],
 #           [0, 1, 0, 0, 0, 0],
 #           [0, 0, 0, 0, 1, 0]]
 
-basic_grid = cPickle.load(open('/home/ahmedeltaweel/Desktop/laptop/save.p' , 'r'))
+basic_grid = cPickle.load(open(os.getcwd()+'/save.p' , 'r'))
 grid = copy.deepcopy(basic_grid)
 
 init = [29, 29]
 goal = [len(grid) - 5, 5]
+
 cost = 1
 
 rows_no = len(grid)
@@ -116,6 +118,40 @@ def search():
 
                             action[x2][y2] = i      # policy line # policy line # policy line
 
+#------------------------------------------------------------------------
+
+def tuning_points(policy):
+    """
+    " reduce the number of points
+    " :parm policy: list of points
+    """
+    new_list = []
+    new_list.append([policy[0][0],policy[0][1]])
+
+    for row in range(1 , len(policy)-1):
+        if policy[row - 1][0] == policy[row][0]:
+            if policy[row][0] != policy[row + 1][0] :
+                new_list.append([policy[row][0],policy[row][1]])
+            else:
+                continue
+        else:
+            new_list.append([policy[row][0],policy[row][1]])
+#-----------
+        new_list2 = []
+        new_list2.append([new_list[0][0],new_list[0][1]])
+        for row in range(1 , len(new_list)-1):
+            if new_list[row - 1][1] == new_list[row][1]:
+                if new_list[row][1] != new_list[row + 1][1] :
+                    new_list2.append([new_list[row][0],new_list[row][1]])
+                else:
+                    continue
+            else:
+                new_list2.append([new_list[row][0],new_list[row][1]])
+    new_list2.append([ policy[len(policy) - 1][0] , policy[len(policy) - 1][1] ])
+    return new_list2
+
+#------------------------------------------------------------------------
+
 def policy():
     policy = [[' ' for row in range(len(grid[0]))] for col in range(len(grid))]
     x = goal[0]
@@ -138,6 +174,12 @@ print( 'path:' , len(path))
 for row in path:
     print (row)
 
-#todo add the funxtion to reduce the nubmer of points
+#------------------------------------------------------------------------
+
+print ('---------------------------------------------')
+for row in tuning_points(path):
+    print (row)
+
+#------------------------------------------------------------------------
 
 #if path != 'fail': policy()
